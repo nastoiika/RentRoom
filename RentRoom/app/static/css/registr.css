@@ -1,0 +1,127 @@
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
+.authorization {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #CBD0E2;
+    border-radius: 35px;
+    max-width: 400px;
+    width: 100%;
+    gap: 10px;
+}
+
+.authorization h1{
+    font-size: 35px;
+}
+
+.user-data1{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: #3470BF;
+}
+
+.user-data{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 25px;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.user-data label{
+    color: #3470BF;
+}
+
+.user-data input {
+    border-radius: 10px;
+    border: 2px solid #CBD0E2;
+    width: 300px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.registr {
+    border-radius: 10px;
+    padding: 10px 15px;
+    background-color: #3470BF;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 550;
+    font-size: 20px;
+}
+
+.user-data label, button {
+    margin-right: 10px; 
+}
+
+/* -------------------------------------------- */
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 40px;
+    background-color: white;
+    border: 2px solid #CBD0E2;
+    border-radius: 35px;
+    max-width: 500px;
+    width: 100%;
+    gap: 20px;
+}
+
+.user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3470BF;
+}
+
+.form-group input {
+    border-radius: 10px;
+    border: 2px solid #CBD0E2;
+    font-size: 18px;
+    padding: 8px;
+    color: #333;
+}
+
+.form-group input:focus {
+    outline: none;
+    border: 2px solid gray;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+}

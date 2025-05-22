@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="{{ url_for('add_room') }}" class="btn-add">Добавить помещение</a>
+{% for room in advertisement %}
+<div class="cards">
+<div class="card">
+    <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
+    <div class="details">
+        <p class="info">Цена: {{ room.price }}</p>
+        <p class="info">Тип: {{ room.roomtype }}</p>
+        <p class="info">Вместимость: {{ room.capacity }}</p>
+        <p class="info">Город: {{ room.city }}</p>
+        <p class="info">Адрес: {{ room.address }}</p>
+        <p class="info">Владелец: {{ room.name }}</p>
+        <div class="control">
+            <a href="{{ url_for('edit_room', room_id=room.id) }}" class="btn">
+                <span class="btn-card">Редактировать</span>
+            </a>
+            <form method="POST" action="{{ url_for('delete_room', room_id=room.id) }}">
+                <button type="submit" class="btn">
+                    <span class="btn-card">Удалить</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

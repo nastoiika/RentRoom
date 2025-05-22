@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" action="{{ url_for('auth') }}">
+    <div class="auth-wrapper">
+        <div class="authorization">
+            <h1>Авторизация</h1>
+            <div>
+                <div class="user-data">
+                    <label for="login">Логин:</label>
+                    <input type="text" id="login" name="username">
+                </div>
+                <div class="user-data">
+                    <label for="userpass">Пароль:</label>
+                    <input type="password" id="userpass" name="password">
+                </div>
+            </div>
+            <div class="user-data1">
+                <button type="submit" class="registr">Войти</button>
+                <a href="{{ url_for('registr') }}"><button type="button" class="registr">Зарегистрироваться</button></a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

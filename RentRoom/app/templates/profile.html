@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="advertisement">
+    <h1 class="history-book">История броней</h1>
+
+{% for booking in bookings %}
+{% set room = booking.advertisement %}
+    <div class="card">
+        <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
+        <div class="details">
+            <p class="info">{{ room.roomtype }} {{ room.capacity }}м²</p>
+            <p class="info">Стоимость {{ room.price }}</p>
+            <p class="info">{{ room.city }}, {{ room.address }}</p>
+            <p class="info">Владелец: {{ room.name }}</p>
+            <form action="{{ url_for('delete_booking', booking_id=booking.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="btn">
+                    <span class="btn-card">Удалить</span>
+                </button>
+            </form>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

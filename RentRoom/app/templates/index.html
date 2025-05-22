@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form id="filterForm" method="post" action="{{ url_for('index') }}">
+    <div class="filtr">
+        <select id="housingType" name="roomtype">
+            <option value="">Все типы</option>
+            <option value="Квартира">Квартира</option>
+            <option value="Дом">Дом</option>
+            <option value="Лофт">Лофт</option>
+        </select>
+        
+        <input id="priceMaxField" type="number" placeholder="Цена до, ₽" name="price_max">
+        <input id="count" type="number" placeholder="Вместимость" name="capacity">
+        
+        <div>
+            <input id="calendarRange" class="select" type="text" readonly placeholder="Выбрать даты">
+            <input type="hidden" name="date_start" id="dateStart">
+            <input type="hidden" name="date_end" id="dateEnd">
+        </div>
+        <div>
+            <button id="city" class="select" type="button">Выбрать город</button>
+            <input type="hidden" name="city" id="selectedCity">
+        </div>
+        
+        <button type="submit" id="findBtn" class="find">Найти</button>
+    </div>
+</form>
+
+<div id="roomsContainer">
+{% for room in advertisement %}
+<div class="cards" data-roomtype="{{ room.roomtype }}" data-price="{{ room.price }}" data-capacity="{{ room.capacity }}" data-city="{{ room.city }}">
+    <div class="card">
+        <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
+        <div class="details">
+            <p class="info">{{ room.roomtype }} {{ room.capacity }}м²</p>
+            <p class="info">Стоимость {{ room.price }}</p>
+            <p class="info">{{ room.city }}, {{ room.address }}</p>
+            <p class="info">Владелец: {{ room.name }}</p>
+            <div class="control">
+                <a href="{{ url_for('booking', room_id=room.id) }}" class="btn">
+                    <span class="btn-card">Арендовать</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+<div id="modal-city" class="modal">
+    <div class="modal-body">
+        <div class="modal-content">
+            <input type="text" id="cityInput" placeholder="Введите город" autocomplete="off">
+            <div id="suggestions" style="text-align: left;"></div>
+            <button type="button" id="closeModalCity" data-bs-dismiss="modal">Окей</button>
+        </div>
+    </div>
+</div>
+        
+{% endblock %}

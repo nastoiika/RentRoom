@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-wrapper">
+    <div class="form-container">
+        <h1>Добавить помещение</h1>
+        <form method="post" class="user-form" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="name">ФИО</label>
+                <input type="text" autocomplete="off" name="name" id="name" value="{{ room.name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="roomtype">Тип помещения:</label>
+                <input type="text" name="roomtype" id="roomtype" value="{{ room.roomtype }}">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Цена</label>
+                <input type="number" name="price" id="price" value="{{ room.price }}">
+            </div>
+
+            <div class="form-group">
+                <label for="capacity">Вместимость</label>
+                <input type="number" name="capacity" id="capacity" value="{{ room.capacity }}">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Адрес</label>
+                <input type="text" name="address" id="address" value="{{ room.address }}">
+            </div>
+
+            <div class="form-group">
+                <label for="city">Город</label>
+                <input type="text" name="city" id="city" value="{{ room.city }}">
+            </div>
+
+            <div class="form-group">
+                <label for="img">Фото</label>
+                <input type="file" name="img" id="img">
+                {% if room.img %}
+                    <p>Текущее фото: {{ room.img }}</p>
+                    <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" width="150">
+                {% endif %}
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="registr">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
