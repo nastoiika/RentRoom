@@ -108,7 +108,7 @@
     color: #3470BF;
 }
 
-.form-group input {
+.form-group input, select {
     border-radius: 10px;
     border: 2px solid #CBD0E2;
     font-size: 18px;

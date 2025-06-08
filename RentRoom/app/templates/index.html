@@ -2,28 +2,30 @@
 
 {% block content %}
 
-<form id="filterForm" method="post" action="{{ url_for('index') }}">
+<form id="filterForm" method="get" action="{{ url_for('index') }}">
     <div class="filtr">
         <select id="housingType" name="roomtype">
             <option value="">Все типы</option>
-            <option value="Квартира">Квартира</option>
-            <option value="Дом">Дом</option>
-            <option value="Лофт">Лофт</option>
+            <option value="Квартира" {% if form_data.roomtype == "Квартира" %}selected{% endif %}>Квартира</option>
+            <option value="Дом" {% if form_data.roomtype == "Дом" %}selected{% endif %}>Дом</option>
+            <option value="Лофт" {% if form_data.roomtype == "Лофт" %}selected{% endif %}>Лофт</option>
         </select>
         
-        <input id="priceMaxField" type="number" placeholder="Цена до, ₽" name="price_max">
-        <input id="count" type="number" placeholder="Вместимость" name="capacity">
+        <input id="priceMaxField" type="number" placeholder="Цена до, ₽" name="price_max" value="{{ form_data.price_max if form_data.price_max }}">
+        <input id="count" type="number" placeholder="Вместимость м²" name="capacity" value="{{ form_data.capacity if form_data.capacity }}">
         
         <div>
             <input id="calendarRange" class="select" type="text" readonly placeholder="Выбрать даты">
-            <input type="hidden" name="date_start" id="dateStart">
-            <input type="hidden" name="date_end" id="dateEnd">
+            <input type="hidden" name="date_start" id="dateStart" value="{{ form_data.date_start if form_data.date_start }}">
+            <input type="hidden" name="date_end" id="dateEnd" value="{{ form_data.date_end if form_data.date_end }}">
         </div>
         <div>
-            <button id="city" class="select" type="button">Выбрать город</button>
-            <input type="hidden" name="city" id="selectedCity">
+            <button id="city" class="select" type="button">
+                {% if form_data.city %}{{ form_data.city }}{% else %}Выбрать город{% endif %}
+            </button>
+            <input type="hidden" name="city" id="selectedCity" value="{{ form_data.city if form_data.city }}">
         </div>
-        
+                
         <button type="submit" id="findBtn" class="find">Найти</button>
     </div>
 </form>
@@ -34,16 +36,18 @@
     <div class="card">
         <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
         <div class="details">
-            <p class="info">{{ room.roomtype }} {{ room.capacity }}м²</p>
-            <p class="info">Стоимость {{ room.price }}</p>
-            <p class="info">{{ room.city }}, {{ room.address }}</p>
-            <p class="info">Владелец: {{ room.name }}</p>
+            <p class="info1">{{ room.roomtype }} {{ room.capacity }}м²</p>
+            <p class="info2">{{ room.city }}</p>
+            <p class="info2">{{ room.address }}</p>
+            <p class="info3">Владелец: {{ room.name }}</p>
+            <p class="info3">Опубликовано: {{ room.created_at.strftime('%d.%m.%Y') }}</p>
             <div class="control">
-                <a href="{{ url_for('booking', room_id=room.id) }}" class="btn">
+                <a href="{{ url_for('users.booking', room_id=room.id) }}" class="btn">
                     <span class="btn-card">Арендовать</span>
                 </a>
             </div>
         </div>
+        <div class="inf"><p class="info4">{{ room.price }}₽/сутки</p></div>
     </div>
 </div>
 {% endfor %}

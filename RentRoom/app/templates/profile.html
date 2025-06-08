@@ -5,23 +5,29 @@
 <div class="advertisement">
     <h1 class="history-book">История броней</h1>
 
-{% for booking in bookings %}
-{% set room = booking.advertisement %}
-    <div class="card">
-        <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
-        <div class="details">
-            <p class="info">{{ room.roomtype }} {{ room.capacity }}м²</p>
-            <p class="info">Стоимость {{ room.price }}</p>
-            <p class="info">{{ room.city }}, {{ room.address }}</p>
-            <p class="info">Владелец: {{ room.name }}</p>
-            <form action="{{ url_for('delete_booking', booking_id=booking.id) }}" method="post" style="display:inline;">
-                <button type="submit" class="btn">
-                    <span class="btn-card">Удалить</span>
-                </button>
-            </form>
+    {% for booking in bookings %}
+    {% set room = booking.advertisement %}
+    <div class="cards" data-roomtype="{{ room.roomtype }}" data-price="{{ room.price }}" data-capacity="{{ room.capacity }}" data-city="{{ room.city }}">
+        <div class="card">
+            <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
+            <div class="details">
+                <p class="info1">{{ room.roomtype }} {{ room.capacity }}м²</p>
+                <p class="info5">Даты: {{ booking.date_begin.strftime('%d.%m.%Y') }}-{{ booking.date_end.strftime('%d.%m.%Y') }}</p>
+                <p class="info2">{{ room.city }}</p>
+                <p class="info2">{{ room.address }}</p>
+                <p class="info3">Владелец: {{ room.name }}</p>
+                <p class="info3">Опубликовано: {{ room.created_at.strftime('%d.%m.%Y') }}</p>
+                <form action="{{ url_for('users.delete_booking', booking_id=booking.id) }}" method="post" style="display:inline;" class="control">
+                    <button type="submit" class="btn">
+                        <span class="btn-card">Отменить</span>
+                    </button>
+                </form>
+            </div>
+            <div class="inf">
+                <p class="info4">{{ room.price }}₽/сутки</p>
+            </div>
         </div>
     </div>
-{% endfor %}
 </div>
-
+{% endfor %}
 {% endblock %}

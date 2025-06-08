@@ -12,8 +12,11 @@
             </div>
 
             <div class="form-group">
-                <label for="roomtype">Тип помещения:</label>
-                <input type="text" name="roomtype" id="roomtype" value="{{ room.roomtype }}">
+                <select name="roomtype" id="roomtype" autocomplete="roomtype">
+                    <option value="Квартира">Квартира</option>
+                    <option value="Дом">Дом</option>
+                    <option value="Лофт">Лофт</option>
+                </select>
             </div>
 
             <div class="form-group">

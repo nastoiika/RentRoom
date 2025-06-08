@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form method="post" action="{{ url_for('auth') }}">
+<form method="post" action="{{ url_for('auth.login') }}">
     <div class="auth-wrapper">
         <div class="authorization">
             <h1>Авторизация</h1>
@@ -18,7 +18,7 @@
             </div>
             <div class="user-data1">
                 <button type="submit" class="registr">Войти</button>
-                <a href="{{ url_for('registr') }}"><button type="button" class="registr">Зарегистрироваться</button></a>
+                <a href="{{ url_for('auth.registr') }}"><button type="button" class="registr">Зарегистрироваться</button></a>
             </div>
         </div>
     </div>

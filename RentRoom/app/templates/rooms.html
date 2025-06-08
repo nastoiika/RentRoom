@@ -1,30 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href="{{ url_for('add_room') }}" class="btn-add">Добавить помещение</a>
+<div class="add-room">
+    <a href="{{ url_for('admin.add_room') }}" class="btn-add">Добавить помещение</a>
+</div>
 {% for room in advertisement %}
 <div class="cards">
 <div class="card">
-    <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
-    <div class="details">
-        <p class="info">Цена: {{ room.price }}</p>
-        <p class="info">Тип: {{ room.roomtype }}</p>
-        <p class="info">Вместимость: {{ room.capacity }}</p>
-        <p class="info">Город: {{ room.city }}</p>
-        <p class="info">Адрес: {{ room.address }}</p>
-        <p class="info">Владелец: {{ room.name }}</p>
-        <div class="control">
-            <a href="{{ url_for('edit_room', room_id=room.id) }}" class="btn">
-                <span class="btn-card">Редактировать</span>
-            </a>
-            <form method="POST" action="{{ url_for('delete_room', room_id=room.id) }}">
-                <button type="submit" class="btn">
+        <img src="{{ url_for('static', filename='uploads/' ~ room.img) }}" alt="Фото помещения" class="room-image">
+        <div class="details">
+            <p class="info1">{{ room.roomtype }} {{ room.capacity }}м²</p>
+            <p class="info2">{{ room.city }}</p>
+            <p class="info2">{{ room.address }}</p>
+            <p class="info3">Владелец: {{ room.name }}</p>
+            <p class="info3">Опубликовано: {{ room.created_at.strftime('%d.%m.%Y') }}</p>
+            <div class="control">
+                <a href="{{ url_for('admin.edit_room', room_id=room.id) }}" class="btn">
+                    <span class="btn-card">Редактировать</span>
+                </a>
+                <button onclick="openModal('{{ room.id }}')" class="btn">
                     <span class="btn-card">Удалить</span>
                 </button>
+            </div>
+        </div>
+        <div class="inf"><p class="info4">{{ room.price }}₽/сутки</p></div>
+    </div>
+</div>
+
+<div id="deleteModal-{{ room.id }}" class="modal1" style="display: none;">
+    <div class="modal-content1">
+        <span class="close" onclick="closeModal('{{ room.id }}')">&times;</span>
+        <p>Вы уверены, что хотите удалить это помещение?</p>
+        <div class="modal-buttons">
+            <form method="POST" action="{{ url_for('admin.delete_room', room_id=room.id) }}">
+                <button type="submit" class="btn-confirm">Удалить</button>
             </form>
+            <button onclick="closeModal('{{ room.id }}')" class="btn-cancel">Отмена</button>
         </div>
     </div>
 </div>
-</div>
 {% endfor %}
 {% endblock %}
+
